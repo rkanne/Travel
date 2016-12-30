@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User detail</title>
+		{% load staticfiles %}
+  	<link rel="stylesheet" href="{% static 'travelbuddy/css/styles.css' %}">
+</head>
+<body>
+<div class="destination">
+<div class="header"><h4><a href="/travels">Home</a> &nbsp;&nbsp;<a href="/logout">Logout</a></h4></div>
+<h2>{{trip.0.destination}}</h2>
+{% for x in trip %}
+{% for y in user %}
+{%if y.id == x.user_id%}
+<p>Planned by: {{y.name}}</p>		
+{%endif%}
+{%endfor%}
+{%endfor%}
+<p>Description: {{trip.0.description}}</p>
+<p>Travel Date From: {{trip.0.travel_from}}</p>
+<p>Travel Date To: {{trip.0.travel_to}}</p>
+
+</div>
+<div class="destination">
+
+<h3>Other users'joining the trip</h3>
+{% for x in join %}
+{% if x.trip_id == trip.0.id %}
+{% if x.user.id != x.trip.user_id %}
+<p>{{x.user.name}} 
+{% if x.user.id == request.session.user_id %}
+<a href="/remove/{{x.trip_id}}/{{x.user.id}}">Remove join</a>
+{%endif %}
+{%endif %}
+</p>
+{%endif%}
+
+
+{%endfor%}
+
+
+</div>
+</body>
+</html>

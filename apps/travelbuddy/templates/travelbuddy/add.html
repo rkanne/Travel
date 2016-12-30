@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Add Trip</title>
+		{% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'travelbuddy/css/styles.css' %}">
+
+</head>
+<body>
+<div id="wrapper">
+<h4><a href="/travels">Home</a>&nbsp;&nbsp; <a href="/logout">Logout</a></h4>
+<form action="/travels/add" method="POST">
+{% csrf_token %}
+<h1>Add a Trip</h1>
+<p>Destination: <input type="text" name="txt_destination" id="txt_destination"></p>
+<p>Description:</p>
+<p><textarea cols="50" rows="10" name="txt_description"></textarea></p>
+<p>Travel Date From: <input type="date" name="txt_date_from" id="txt_date_from"></p>
+<p>Travel Date To: <input type="date" name="txt_date_to" id="txt_date_to"></p>
+
+<p><input type="submit" name="submit" value="Add"></p>
+</form>
+{% for msg in messages %}       
+  <p>
+ ***{{msg}}
+  </p>
+{% endfor %}
+</div>
+</body>
+</html>
